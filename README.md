@@ -185,6 +185,11 @@ Esta implementação possui inserção e busca; **remoção não está implement
 **Pratique:** insira valores em ordem crescente e acompanhe quando ocorrem
 recolorações e rotações. Tente inserir uma duplicata e observe a rejeição.
 
+## Exercícios de árvores B
+
+As [respostas resumidas dos Exercícios 1](docs/ArvoreB/Exercicios1.md) incluem os
+limites de ocupação, intervalos das subárvores e desenhos das inserções e remoções.
+
 ## Comparação dos custos
 
 Considere `n` como o número de elementos e `h` como a altura da árvore.
