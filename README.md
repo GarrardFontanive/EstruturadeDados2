@@ -1,6 +1,6 @@
 # Estrutura de Dados 2
 
-Projeto de estudo em Java com exemplos de buscas em vetores e árvores. Cada assunto
+Projeto de estudo em Java com exemplos de buscas em vetores, árvores e grafos. Cada assunto
 possui uma classe executável para acompanhar o algoritmo, alterar os dados de entrada
 e comparar os resultados. As implementações usam apenas a biblioteca padrão do Java.
 
@@ -42,6 +42,7 @@ java -cp out Arvores.ArvoreBinaria.MainBT
 java -cp out Arvores.ArvoreBinariaBusca.MainBST
 java -cp out Arvores.ArvoreAvl.MainAvl
 java -cp out Arvores.ArvoreRubroNegra.MainArvoreRubroNegra
+java -cp out Grafos.GrafoMatrizAdjacencia
 ```
 
 No IntelliJ IDEA, abra a pasta do projeto, selecione um JDK instalado e marque `src`
@@ -58,6 +59,8 @@ src/
 │   ├── ExemploBuscaSequencial.java   # Busca em vetor sem ordenação obrigatória
 │   ├── ExemploBuscaBinaria.java      # Busca em vetor ordenado
 │   └── ExemploArrays.java            # Arrays.binarySearch e ponto de inserção
+├── Grafos/
+│   └── GrafoMatrizAdjacencia.java     # Matriz, direção, pesos e demonstração
 └── Arvores/
     ├── ArvoreBinaria/
     │   ├── ArvoreBinaria.java        # Montagem manual e percursos
@@ -185,6 +188,52 @@ Esta implementação possui inserção e busca; **remoção não está implement
 **Pratique:** insira valores em ordem crescente e acompanhe quando ocorrem
 recolorações e rotações. Tente inserir uma duplicata e observe a rejeição.
 
+### 8. Grafos com matriz de adjacência
+
+Leia e execute [GrafoMatrizAdjacencia.java](src/Grafos/GrafoMatrizAdjacencia.java).
+O construtor recebe a quantidade de vértices e duas opções: `direcionado` e
+`ponderado`. Os vértices são identificados de `0` a `numeroVertices - 1`;
+na matriz, a linha representa a origem e a coluna representa o destino.
+
+Em um grafo **não direcionado**, inserir ou remover uma aresta atualiza também
+a posição inversa, mantendo a matriz simétrica. Em um grafo **direcionado**,
+apenas a posição origem → destino é alterada.
+
+Use `adicionarAresta(origem, destino)` em grafos não ponderados e
+`adicionarAresta(origem, destino, peso)` em grafos ponderados. As sobrecargas
+avisam quando são usadas no tipo de grafo incorreto. A inserção e a remoção
+validam os índices dos vértices antes de acessar a matriz.
+
+Internamente, `Double.POSITIVE_INFINITY` indica ausência de aresta. Na impressão,
+grafos não ponderados usam `1` para presença e `0` para ausência; grafos ponderados
+mostram o peso ou `inf`. **Peso zero é uma aresta válida**, diferente de ausência.
+
+O `main` da própria classe apresenta dois exemplos com quatro vértices:
+
+```text
+Não direcionado e não ponderado:
+      0  1  2  3
+  0   0  1  1  0
+  1   1  0  1  0
+  2   1  1  0  1
+  3   0  0  1  0
+
+Direcionado e ponderado:
+        0    1    2    3
+  0   inf  4.0  1.5  inf
+  1   inf  inf  inf  2.0
+  2   inf  0.0  inf  inf
+  3   inf  inf  inf  inf
+```
+
+`removerAresta(origem, destino)` restaura a ausência de aresta, inclusive na
+posição inversa quando o grafo não é direcionado. A classe ainda não implementa
+percursos em largura/profundidade nem listagem de vizinhos.
+
+**Pratique:** remova a aresta entre `0` e `2` do primeiro exemplo e imprima novamente.
+No segundo, compare `2 → 1`, de peso zero, com `1 → 2`, que não existe. Tente usar
+o vértice `4` para observar a validação dos limites.
+
 ## Exercícios de árvores B
 
 As [respostas resumidas dos Exercícios 1](docs/ArvoreB/Exercicios1.md) incluem os
@@ -205,6 +254,10 @@ Considere `n` como o número de elementos e `h` como a altura da árvore.
 
 O custo de ordenar um vetor não está incluído no custo da busca binária.
 As árvores usam O(n) de armazenamento; percursos recursivos usam pilha O(h).
+
+No grafo com `V` vértices, a matriz ocupa O(V²) de espaço. A inicialização e a
+impressão custam O(V²); inserir ou remover uma aresta custa O(1), pois acessa
+diretamente uma ou duas células da matriz.
 
 ## Estudando pelos commits
 

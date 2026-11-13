@@ -13,6 +13,7 @@ public class Main {
         System.out.println("5. BST:             java -cp out Arvores.ArvoreBinariaBusca.MainBST");
         System.out.println("6. AVL:             java -cp out Arvores.ArvoreAvl.MainAvl");
         System.out.println("7. Rubro-negra:     java -cp out Arvores.ArvoreRubroNegra.MainArvoreRubroNegra");
+        System.out.println("8. Grafos:          java -cp out Grafos.GrafoMatrizAdjacencia");
         System.out.println("Consulte o README.md para explicações e exercícios.");
     }
 }
