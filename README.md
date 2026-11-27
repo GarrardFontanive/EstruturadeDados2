@@ -82,7 +82,9 @@ src/
 │   ├── ExemploBuscaBinaria.java      # Busca em vetor ordenado
 │   └── ExemploArrays.java            # Arrays.binarySearch e ponto de inserção
 ├── Grafos/
-│   └── GrafoMatrizAdjacencia.java     # Matriz, direção, pesos e demonstração
+│   ├── GrafoMatrizAdjacencia.java      # Matriz, direção, pesos e demonstração
+│   └── ListaAdjacencia.java  
+│ 
 └── Arvores/
     ├── ArvoreBinaria/
     │   ├── ArvoreBinaria.java        # Montagem manual e percursos
