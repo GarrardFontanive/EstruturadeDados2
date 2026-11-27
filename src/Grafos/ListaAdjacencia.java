@@ -140,9 +140,39 @@ public class ListaAdjacencia {
             System.out.println(
                     "Vértice" + i + ": dist = " + dist[i] + ", pai = " + pai[i]);
         }
+    }
 
+    public void buscarEmProfundidade(int origem) {
+        if (!verticeValido(origem)) {
+            System.out.println("Vertice Invalido");
+            return;
+        }
 
+        boolean[] visitado = new boolean[numeroVertices];
+        Deque<Integer> pilha = new ArrayDeque<>();
+        pilha.push(origem);
 
+        System.out.print("DFS a partir do vertice " + origem + ": ");
+        while (!pilha.isEmpty()) {
+            int atual = pilha.pop();
+
+            if(!visitado[atual]) {
+                visitado[atual] = true;
+                System.out.print(atual + " ");
+
+                ArrayList<Aresta> vizinhos = listaAdjacencia.get(atual);
+
+                //Empilha em ordem inversa apara visitar o primeiro o início da lista
+                for (int i = vizinhos.size() - 1; i >= 0; i--) {
+                    int vizinho = vizinhos.get(i).destino;
+
+                    if(!visitado[vizinho]) {
+                        pilha.push(vizinho);
+                    }
+                }
+            }
+        }
+        System.out.println();
     }
 
     public static void main(String[] args) {
@@ -168,6 +198,8 @@ public class ListaAdjacencia {
         grafoBusca.adicionarAresta(4,5,1);
         System.out.println();
         grafoBusca.buscaEmLargura(0);
+        System.out.println();
+        grafoBusca.buscarEmProfundidade(0);
     }
 }
 
