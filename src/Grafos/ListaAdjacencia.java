@@ -3,10 +3,9 @@ import java.util.ArrayList;
 
 public class ListaAdjacencia {
 
-    private class Aresta {
+    private class Aresta{
         private int destino;
         private int peso;
-
         public Aresta(int destino, int peso) {
             this.destino = destino;
             this.peso = peso;
@@ -17,49 +16,46 @@ public class ListaAdjacencia {
     private int numeroVertices;
     private boolean direcionado;
 
-    public ListaAdjacencia(int numeroVertices, boolean direcionando) {
+    public ListaAdjacencia(int numeroVertices, boolean direcionado) {
         this.numeroVertices = numeroVertices;
-        this.direcionado = direcionando;
+        this.direcionado = direcionado;
         this.listaAdjacencia = new ArrayList<>(numeroVertices);
-
-        //cria uma lista vazia para cada vértice
+        //Cria uma lisra vazia para cada vertice
         for (int i = 0; i < numeroVertices; i++) {
             listaAdjacencia.add(new ArrayList<>());
-        }
-    }
-
-    public void adicionarAresta(int origem, int destino, int peso) {
-        if (!verticeValido(origem) || !verticeValido(destino)) {
-            System.out.println("Vértice invalido");
-            return;
-        }
-
-        adicionarNaLista(origem, destino, peso);
-        if (direcionado && origem != destino) {
-            adicionarNaLista(destino, origem, peso);
         }
     }
 
     private boolean verticeValido(int vertice) {
         return vertice >= 0 && vertice < numeroVertices;
     }
+    public void adicionarAresta(int origem, int destino, int peso) {
+        if(!verticeValido(origem) || !verticeValido(destino)) {
+            System.out.println("Vertice Invalido");
+            return;
+        }
+        adicionarNaLista(origem, destino, peso);
+        if(!direcionado && origem != destino) {
+            adicionarNaLista(destino, origem, peso);
+        }
+    }
 
     private void adicionarNaLista(int origem, int destino, int peso) {
-        for(Aresta aresta :listaAdjacencia.get(origem)) {
+        for(Aresta aresta: listaAdjacencia.get(origem)) {
             if (aresta.destino == destino) {
+                //Se ja existe, atualiza o peso.
                 aresta.peso = peso;
                 return;
             }
         }
-        listaAdjacencia.get(origem).add(new Aresta(destino,peso));
+        listaAdjacencia.get(origem).add(new Aresta(destino, peso));
     }
 
     public void removerAresta(int origem, int destino) {
-        if (!verticeValido(origem) || !verticeValido(destino)) {
-            System.out.println("Vértice invalido");
+        if(!verticeValido(origem) || !verticeValido(destino)) {
+            System.out.println("Vertice Invalido");
             return;
         }
-
         removerDaLista(origem, destino);
         if(!direcionado && origem != destino) {
             removerDaLista(destino, origem);
@@ -67,11 +63,10 @@ public class ListaAdjacencia {
     }
 
     private void removerDaLista(int origem, int destino) {
-        ArrayList<Aresta> aresta = listaAdjacencia.get(origem);
-
-        for (int i = 0; i < aresta.size(); i++) {
-            if (aresta.get(i).destino == destino) {
-                aresta.remove(i);
+        ArrayList<Aresta> arestas = listaAdjacencia.get(origem);
+        for(int i = 0; i < arestas.size(); i++) {
+            if(arestas.get(i).destino == destino) {
+                arestas.remove(i);
                 return;
             }
         }
@@ -79,14 +74,13 @@ public class ListaAdjacencia {
 
     public void imprimirListaAdjacencia() {
         System.out.println("Lista Adjacencia");
-        for (int i = 0; i < numeroVertices; i++) {
+        for(int i=0; i < numeroVertices; i++) {
             System.out.print(i + ": ");
-            if (listaAdjacencia.get(i).isEmpty()) {
-                System.out.print("Lista vazia");
+            if(listaAdjacencia.get(i).isEmpty()) {
+                System.out.print("Lista Vazia");
             } else {
-                for (Aresta aresta : listaAdjacencia.get(i)) {
-                    System.out.print(
-                            aresta.destino + "(peso: " + aresta.peso + ")");
+                for(Aresta aresta: listaAdjacencia.get(i)) {
+                    System.out.print(aresta.destino + " (peso " + aresta.peso + ") ");
                 }
             }
             System.out.println();
@@ -94,5 +88,14 @@ public class ListaAdjacencia {
     }
 
     public static void main(String[] args) {
+        ListaAdjacencia grafo = new ListaAdjacencia(4, false);
+
+        grafo.adicionarAresta(0, 1, 5);
+        grafo.adicionarAresta(0, 2, 0);
+        grafo.adicionarAresta(1, 2, 3);
+
+        grafo.imprimirListaAdjacencia();
+
     }
 }
+
