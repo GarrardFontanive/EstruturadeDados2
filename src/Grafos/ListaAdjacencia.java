@@ -77,6 +77,22 @@ public class ListaAdjacencia {
         }
     }
 
+    public void imprimirListaAdjacencia() {
+        System.out.println("Lista Adjacencia");
+        for (int i = 0; i < numeroVertices; i++) {
+            System.out.print(i + ": ");
+            if (listaAdjacencia.get(i).isEmpty()) {
+                System.out.print("Lista vazia");
+            } else {
+                for (Aresta aresta : listaAdjacencia.get(i)) {
+                    System.out.print(
+                            aresta.destino + "(peso: " + aresta.peso + ")");
+                }
+            }
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
     }
 }
