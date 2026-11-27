@@ -1,5 +1,8 @@
 package Grafos;
 import java.util.ArrayList;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Queue;
 
 public class ListaAdjacencia {
 
@@ -87,6 +90,61 @@ public class ListaAdjacencia {
         }
     }
 
+    public void buscaEmLargura(int origem) {
+        if (!verticeValido(origem)) {
+            System.out.println("Vertice Invalido");
+            return;
+        }
+
+        boolean[] visitado = new boolean[numeroVertices];
+        int[] dist = new int[numeroVertices];
+        int[] pai = new int[numeroVertices];
+        Queue<Integer> fila = new ArrayDeque<>();
+
+        for (int i = 0; i < numeroVertices; i++) {
+            dist[i] = -1;
+            pai[i] = -1;
+        }
+
+        dist[origem] = 0;
+        //O pai da origem permanece -1
+
+        //Marcar o vértice como descoberto antes de colocá-lo na fila
+        visitado[origem] = true;
+        fila.add(origem);
+
+        System.out.print("BFS a partir do vértice " + origem + ": ");
+        while (!fila.isEmpty()) {
+            int atual = fila.poll();
+            System.out.print(atual + " ");
+
+            //Examina as arestas que saem do Véertice atual.
+            for(Aresta aresta: listaAdjacencia.get(atual)) {
+                int vizinho = aresta.destino;
+                if(!visitado[vizinho]) {
+                    //Evitar que o mesmo vértice entre na fila novamente
+                    visitado[vizinho] = true;
+
+                    //A distância é medida em um número de arestas
+                    dist[vizinho] = dist[atual] + 1;
+                    pai[vizinho] = atual;
+
+                    fila.add(vizinho);
+                }
+            }
+        }
+        System.out.println();
+        System.out.println("Distâncias e pais: ");
+
+        for(int i = 0; i < numeroVertices; i++) {
+            System.out.println(
+                    "Vértice" + i + ": dist = " + dist[i] + ", pai = " + pai[i]);
+        }
+
+
+
+    }
+
     public static void main(String[] args) {
         ListaAdjacencia grafo = new ListaAdjacencia(4, false);
 
@@ -96,6 +154,20 @@ public class ListaAdjacencia {
 
         grafo.imprimirListaAdjacencia();
 
+        System.out.println();
+        grafo.removerAresta(0, 2);
+        grafo.imprimirListaAdjacencia();
+
+        ListaAdjacencia grafoBusca = new ListaAdjacencia(7, false);
+
+        grafoBusca.adicionarAresta(0,1,1);
+        grafoBusca.adicionarAresta(0,2,1);
+        grafoBusca.adicionarAresta(1,3,1);
+        grafoBusca.adicionarAresta(1,4,1);
+        grafoBusca.adicionarAresta(2,4,1);
+        grafoBusca.adicionarAresta(4,5,1);
+        System.out.println();
+        grafoBusca.buscaEmLargura(0);
     }
 }
 
