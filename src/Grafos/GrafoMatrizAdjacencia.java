@@ -102,12 +102,29 @@ public class GrafoMatrizAdjacencia {
 
     }
 
+    public void grau(int vertice) {
+        if (!verticeValido(vertice)) {
+            return;
+        }
+
+        int grau = 0;
+        for (int destino = 0; destino < numeroVertices; destino++) {
+            if (temAresta(vertice, destino)) {
+                grau++;
+            }
+        }
+
+        System.out.println("Grau do vertice " + vertice + ": " + grau);
+    }
+
     public static void main(String[] args) {
         GrafoMatrizAdjacencia gma1 = new GrafoMatrizAdjacencia(4, false, false);
         gma1.adicionarAresta(0,1);
         gma1.adicionarAresta(0,2);
         gma1.adicionarAresta(1,2);
         gma1.adicionarAresta(2,3);
+        gma1.grau(3);
+        gma1.grau(5);
         //gma1.mostarVizinho(2);
         gma1.imprimir();
 
