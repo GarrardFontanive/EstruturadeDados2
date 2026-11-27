@@ -1,8 +1,30 @@
+<div align="center">
+
 # Estrutura de Dados 2
 
-Projeto de estudo em Java com exemplos de buscas em vetores, árvores e grafos. Cada assunto
-possui uma classe executável para acompanhar o algoritmo, alterar os dados de entrada
-e comparar os resultados. As implementações usam apenas a biblioteca padrão do Java.
+**Implementações didáticas de algoritmos e estruturas de dados em Java**
+
+[![Java](https://img.shields.io/badge/Java-17%2B-ED8B00?logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+[![Estruturas de dados](https://img.shields.io/badge/tema-estruturas%20de%20dados-2F80ED)](#conteúdo)
+[![Build](https://img.shields.io/badge/compila%20com-javac-5382A1)](#como-executar)
+[![Sem dependências](https://img.shields.io/badge/dependências-zero-2E7D32)](#como-executar)
+
+</div>
+
+Projeto de estudo com exemplos executáveis de buscas, árvores e grafos. Cada tema
+foi organizado para facilitar a leitura do algoritmo, a alteração das entradas e
+a comparação dos resultados. O projeto usa somente a biblioteca padrão do Java.
+
+## Conteúdo
+
+| Tema | Implementações |
+| --- | --- |
+| Buscas | Sequencial, binária e `Arrays.binarySearch` |
+| Árvores | Binária, BST, AVL e rubro-negra |
+| Grafos | Matriz de adjacência, direção, pesos e grau dos vértices |
+| Exercícios | Respostas resumidas sobre árvores B |
+
+> Projeto desenvolvido para estudo de Estrutura de Dados 2.
 
 ## Como executar
 
@@ -227,8 +249,10 @@ Direcionado e ponderado:
 ```
 
 `removerAresta(origem, destino)` restaura a ausência de aresta, inclusive na
-posição inversa quando o grafo não é direcionado. A classe ainda não implementa
-percursos em largura/profundidade nem listagem de vizinhos.
+posição inversa quando o grafo não é direcionado. O método `grau(vertice)` conta
+as arestas incidentes no grafo não direcionado ou as arestas de saída no grafo
+direcionado. Percursos em largura/profundidade e listagem de vizinhos ainda não
+estão implementados.
 
 **Pratique:** remova a aresta entre `0` e `2` do primeiro exemplo e imprima novamente.
 No segundo, compare `2 → 1`, de peso zero, com `1 → 2`, que não existe. Tente usar
